@@ -1,0 +1,35 @@
+<div class="container" *ngIf="{
+department: department$ | async,
+employees: employees$ | async
+} as config">
+  <div class="row">
+    <div class="col-12 mt-4">
+      <div class="card">
+        <div class="card-header">
+          <span>{{ config.department?.name }}</span>
+        </div>
+        <div class="card-body">
+          <div class="spinner-border" role="status" *ngIf="!config.employees">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+          <table class="table table-striped" *ngIf="config.employees">
+            <thead>
+            <tr>
+              <th>Id</th>
+              <th>First name</th>
+              <th>Last name</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let employee of config.employees">
+              <td>{{ employee.id }}</td>
+              <td>{{ employee.firstName }}</td>
+              <td>{{ employee.lastName }}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
